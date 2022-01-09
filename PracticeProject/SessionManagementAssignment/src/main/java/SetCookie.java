@@ -1,0 +1,47 @@
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class SetCookieDetail
+ */
+@WebServlet("/set-cookie")
+public class SetCookie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SetCookie() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Fetching values received from form.
+		String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        //Setting cookies in response.
+        Cookie usernameCookie = new Cookie("username",username);
+        Cookie passwordCookie = new Cookie("password",password);
+        
+		response.addCookie(usernameCookie);
+        response.addCookie(passwordCookie);
+		
+        
+        response.sendRedirect("show-cookie-details");
+        
+	}
+
+}
